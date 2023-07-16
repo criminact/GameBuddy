@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_image"
     tools:context=".home.ChatActivity">
 
     <LinearLayout
+        android:background="@color/black_1"
         android:id="@+id/chat_toolbar"
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -18,21 +20,30 @@
             android:layout_marginLeft="12dp"
             android:layout_width="32dp"
             android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:layout_height="32dp"
-            android:src="@drawable/back_ic"/>
+            android:rotation="180"
+            android:src="@drawable/arrow_ic"/>
 
         <ImageView
             android:id="@+id/avatar_image"
-            android:layout_marginLeft="24dp"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_marginLeft="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:layout_width="32dp"
+            android:scaleType="centerCrop"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:src="@drawable/avatar1"/>
 
         <TextView
             android:id="@+id/userid_chat_text"
             android:layout_width="wrap_content"
-            android:text="gb/test"
+            android:text="gb/userID"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"/>
@@ -48,24 +59,47 @@
         android:layout_height="match_parent"/>
 
     <LinearLayout
+        android:layout_margin="4dp"
         android:id="@+id/bottom_type_send_layout"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/text_editext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/black_1">
 
         <ImageButton
-            android:id="@+id/text_send_btn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:src="@color/black_1"/>
+            android:id="@+id/emoticons_button"
+            android:layout_width="48dp"
+            android:background="@drawable/background_curved"
+            android:src="@drawable/emoji_ic"
+            app:tint="@color/black_5"
+            android:backgroundTint="@color/black_3"
+            android:layout_height="match_parent" />
+
+        <com.vanniktech.emoji.EmojiEditText
+            android:id="@+id/message_text"
+            android:background="@color/black_3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:scrollbars="vertical"
+            app:emojiSize="18sp"
+            android:fadeScrollbars="false"
+            android:layout_weight="1"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:minLines="1"
+            android:hint="Message"
+            android:textColorHint="@color/black_5"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:id="@+id/send_message_btn"
+            android:layout_width="48dp"
+            app:tint="@color/black_5"
+            android:background="@drawable/background_curved_right"
+            android:src="@drawable/send_ic"
+            android:backgroundTint="@color/black_3"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

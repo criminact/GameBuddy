@@ -8,6 +8,10 @@ import android.os.Bundle
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.noobcode.gamebuddy.utils.FirebaseObject
+import com.vanniktech.emoji.EmojiManager
+import com.vanniktech.emoji.google.GoogleEmojiProvider
+import com.vanniktech.emoji.ios.IosEmojiProvider
+import com.vanniktech.emoji.twitter.TwitterEmojiProvider
 
 class CustomApplication: Application() {
 
@@ -21,6 +25,10 @@ class CustomApplication: Application() {
         ApplicationContext = this
 
         FirebaseObject.auth = Firebase.auth
+
+        EmojiManager.install(GoogleEmojiProvider())
+        EmojiManager.install(TwitterEmojiProvider())
+        EmojiManager.install(IosEmojiProvider())
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

@@ -1,6 +1,7 @@
 package com.noobcode.gamebuddy.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import com.noobcode.gamebuddy.utils.ObjectModels
 import com.noobcode.gamebuddy.utils.ObjectModels.avatarForUsers
 import com.noobcode.gamebuddy.utils.Utils
 import com.noobcode.gamebuddy.databinding.ActivityChatBinding
+import com.vanniktech.emoji.EmojiPopup
 
 class ChatActivity : AppCompatActivity() {
 
@@ -19,6 +21,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var adapter: ChatAdapter
     private var userID: String? = ""
+    private lateinit var emojiPopup: EmojiPopup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +30,8 @@ class ChatActivity : AppCompatActivity() {
         viewmodel = viewModel
         setContentView(binding.root)
 
-        //show loading chats ui
-        loadChats()
+        emojiPopup = EmojiPopup.Builder
+            .fromRootView(binding.root).build(binding.messageText)
 
         val bundle = this.intent.extras
         if (bundle != null) {
@@ -45,22 +48,55 @@ class ChatActivity : AppCompatActivity() {
 
         binding.chatRecyclerView.adapter = adapter
 
-        binding.textSendBtn.setOnClickListener {
+        binding.sendMessageBtn.setOnClickListener {
             userID?.let {
-                if(!binding.textEditext.text.isNullOrEmpty()){
+                if(!binding.messageText.text.isNullOrEmpty()){
                     val message = ObjectModels.ChatData()
-                    message.message = binding.textEditext.text.toString()
+                    message.message = binding.messageText.text.toString()
                     message.sender = FirebaseObject.currentUser.uid
                     message.seenStatus = false
                     message.timestamp = System.currentTimeMillis()
+                    //send locally to self
+                    adapter.addMessage(message)
+                    binding.messageText.setText("")
+                    //send to db
                     viewmodel.sendMessage(
                         Utils.getAStringFrom2Users(
                             FirebaseObject.currentUser.uid,
                             it
                         ), message)
+                    scrollToBottom()
                 }
             }
+        }
 
+        binding.emoticonsButton.setOnClickListener {
+            emojiPopup.toggle()
+        }
+
+        userID?.let {
+            viewmodel.listenToChatChanges(Utils.getAStringFrom2Users(
+                FirebaseObject.currentUser.uid,
+                it
+            ), FirebaseObject.currentUser.uid).observe(this@ChatActivity, Observer {message ->
+                if(message != null){
+                    adapter.addMessage(message)
+                }
+            })
+        }
+
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+
+        binding.avatarImage.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun scrollToBottom() {
+        if(adapter.itemCount > 0){
+            binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount-1)
         }
     }
 
@@ -70,11 +106,6 @@ class ChatActivity : AppCompatActivity() {
             avatarForUsers.size - 1
         )]))
         binding.useridChatText.text = "gb/${userID}"
-    }
-
-    private fun loadChats() {
-        //show loading image
-
     }
 
     private fun updateUI(haveChats: Boolean) {
@@ -88,7 +119,7 @@ class ChatActivity : AppCompatActivity() {
 
         //load initial messages
         userID?.let{ userid ->
-            viewmodel.loadAllChats(
+            viewmodel.loadAllChatMessages(
                 Utils.getAStringFrom2Users(
                     FirebaseObject.currentUser.uid,
                     userid
@@ -101,6 +132,7 @@ class ChatActivity : AppCompatActivity() {
                 else{
                     updateUI(true)
                     adapter.updateList(it)
+                    scrollToBottom()
                     //listen to updates now
 //                    viewmodel.listenToChatChanges(Utils.getAStringFrom2Users(FirebaseObject.currentUser.uid, userid), FirebaseObject.currentUser.uid).observe(this, Observer { message ->
 //                        if(message == null){

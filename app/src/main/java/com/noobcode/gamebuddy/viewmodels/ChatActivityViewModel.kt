@@ -9,8 +9,12 @@ class ChatActivityViewModel : ViewModel(){
 
     var userRepo = UserRepo()
 
-    fun loadAllChats(documentName: String): LiveData<MutableList<ObjectModels.ChatData>?> {
+    fun loadAllChatMessages(documentName: String): LiveData<MutableList<ObjectModels.ChatData>?> {
         return userRepo.loadAllChatMessages(documentName)
+    }
+
+    fun loadAllMessages(userID: String): LiveData<MutableList<ObjectModels.Chat>?> {
+        return userRepo.loadAllMessages(userID)
     }
 
     fun listenToChatChanges(documentName: String, userID: String): LiveData<ObjectModels.ChatData?> {

@@ -90,7 +90,7 @@ class UserRepo {
         var res = MutableLiveData<MutableList<ObjectModels.ChatData>?>()
         var messageList = mutableListOf<ObjectModels.ChatData>()
 
-        FirebaseObject.fireStore.collection("chats").document(documentName).collection("messages").orderBy("timestamp", Query.Direction.DESCENDING).get()
+        FirebaseObject.fireStore.collection("chats").document(documentName).collection("messages").orderBy("timestamp", Query.Direction.ASCENDING).get()
             .addOnSuccessListener { messages ->
                 for(message in messages){
                     messageList.add(message.toObject(ObjectModels.ChatData::class.java))
@@ -107,7 +107,7 @@ class UserRepo {
     fun listenToChatEvents(documentName: String, userID: String): LiveData<ObjectModels.ChatData?> {
         var res = MutableLiveData<ObjectModels.ChatData?>()
 
-        FirebaseObject.fireStore.collection("chats").document(documentName).collection("messages").whereNotEqualTo("sender", userID).orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener{ value, e->
+        FirebaseObject.fireStore.collection("chats").document(documentName).collection("messages").whereNotEqualTo("sender", userID).addSnapshotListener{ value, e->
             if (e != null) {
                 res.value = null
             }else{
@@ -228,6 +228,36 @@ class UserRepo {
                     announcementList.add(announcement.toObject(ObjectModels.Announcement::class.java))
                 }
                 res.value = announcementList
+            }
+            .addOnFailureListener {
+                res.value = null
+            }
+
+        return res
+    }
+
+    fun loadAllMessages(userID: String): LiveData<MutableList<ObjectModels.Chat>?> {
+        var res = MutableLiveData<MutableList<ObjectModels.Chat>?>()
+        var chatList = mutableListOf<ObjectModels.Chat>()
+
+        FirebaseObject.fireStore.collection("chats").whereEqualTo("userID1", userID).get()
+            .addOnSuccessListener { chats ->
+                for(chat in chats){
+                    chatList.add(chat.toObject(ObjectModels.Chat::class.java))
+                }
+
+                FirebaseObject.fireStore.collection("chats").whereEqualTo("userID2", userID).get()
+                    .addOnSuccessListener { chats ->
+                        for (chat in chats) {
+                            chatList.add(chat.toObject(ObjectModels.Chat::class.java))
+                        }
+
+                        res.value = chatList
+                    }
+                    .addOnFailureListener {
+                        res.value = null
+                    }
+
             }
             .addOnFailureListener {
                 res.value = null

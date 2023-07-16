@@ -42,8 +42,16 @@ class HomeFragment : Fragment() {
         binding.homeAnnouncementsRecyclerview.adapter = announcementAdapter
         binding.homeAnnouncementsRecyclerview.layoutManager = LinearLayoutManager(CustomApplication.ApplicationContext)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
         //get all announcements
         showLoading()
+        loadAnnouncements()
+    }
+
+    private fun loadAnnouncements() {
         viewmodel.loadAnnouncements().observe(viewLifecycleOwner, Observer { announcements ->
             if(announcements == null){
                 //no announcements
