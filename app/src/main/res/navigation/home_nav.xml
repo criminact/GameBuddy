@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/home_menu_item">
+
+    <fragment
+        android:id="@+id/home_menu_item"
+        android:name="com.noobcode.gamebuddy.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_menu_item_to_chatsFragment"
+            app:destination="@id/chats_menu_item" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_menu_item"
+        android:name="com.noobcode.gamebuddy.home.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/match_menu_item"
+        android:name="com.noobcode.gamebuddy.home.MatchFragment"
+        android:label="fragment_match"
+        tools:layout="@layout/fragment_match" >
+        <action
+            android:id="@+id/action_matchFragment_to_suggestionFragment"
+            app:destination="@id/suggestion_menu_item" />
+    </fragment>
+    <fragment
+        android:id="@+id/chats_menu_item"
+        android:name="com.noobcode.gamebuddy.home.ChatsFragment"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_matchFragment"
+            app:destination="@id/match_menu_item" />
+    </fragment>
+    <fragment
+        android:id="@+id/suggestion_menu_item"
+        android:name="com.noobcode.gamebuddy.home.SuggestionFragment"
+        android:label="fragment_suggestion"
+        tools:layout="@layout/fragment_suggestion" >
+        <action
+            android:id="@+id/action_suggestionFragment_to_userFragment"
+            app:destination="@id/profile_menu_item" />
+    </fragment>
+</navigation>

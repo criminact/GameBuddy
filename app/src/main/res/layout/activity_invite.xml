@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    android:background="@drawable/background_image"
+    tools:context=".invite.InviteActivity">
+
+    <TextView
+        android:id="@+id/invite_a_friend_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/invite_a_friend_desc_textview"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/welcome_aboard"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/invite_a_friend_desc_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/invite_code_parent_layout"
+        android:fontFamily="@font/karla"
+        android:layout_marginTop="18dp"
+        android:text="Enter the invitation code received from your friend &amp; become a part of out beta testing team."
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/invite_code_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="44dp"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/blue"
+            app:hintTextColor="@color/blue"
+            app:counterEnabled="true"
+            app:boxStrokeErrorColor="@color/red"
+            app:endIconMode="clear_text"
+            app:endIconDrawable="@drawable/cancel_ic_padding"
+            app:errorEnabled="true"
+            app:errorIconTint="@color/red"
+            app:counterMaxLength="5"
+            app:boxBackgroundColor="@color/mtrl_filled_background_color"
+            app:startIconDrawable="@drawable/lock_ic_padding"
+            android:hint="Invite Code">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/invite_code_editext"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_anchorGravity="bottom|right|end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/invite_btn"
+            app:backgroundTint="@color/blue"
+            app:fabSize="normal"
+            app:shapeAppearanceOverlay="@style/fab_style"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_ic"/>
+
+        <ProgressBar
+            android:id="@+id/fabProgress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/yellow" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

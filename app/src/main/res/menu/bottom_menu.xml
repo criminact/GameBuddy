@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/home_menu_item"
+    android:title="Home"
+    android:icon="@drawable/home_selector_icon">
+</item>
+<item android:id="@+id/chats_menu_item"
+    android:title="Chats"
+    android:icon="@drawable/chats_selector_icon">
+</item>
+<item android:id="@+id/match_menu_item"
+    android:title="Match"
+    android:icon="@drawable/match_selector_icon">
+</item>
+<item android:id="@+id/suggestion_menu_item"
+    android:title="Suggestion"
+    android:icon="@drawable/suggestion_selector_icon">
+</item>
+<item android:id="@+id/profile_menu_item"
+    android:title="Profile"
+    android:icon="@drawable/profile_selector_icon">
+</item>
+</menu>

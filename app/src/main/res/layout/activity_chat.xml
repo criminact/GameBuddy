@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.ChatActivity">
+
+    <LinearLayout
+        android:id="@+id/chat_toolbar"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_marginLeft="12dp"
+            android:layout_width="32dp"
+            android:layout_gravity="center"
+            android:layout_height="32dp"
+            android:src="@drawable/back_ic"/>
+
+        <ImageView
+            android:id="@+id/avatar_image"
+            android:layout_marginLeft="24dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:src="@drawable/avatar1"/>
+
+        <TextView
+            android:id="@+id/userid_chat_text"
+            android:layout_width="wrap_content"
+            android:text="gb/test"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler_view"
+        android:layout_above="@+id/bottom_type_send_layout"
+        android:layout_below="@id/chat_toolbar"
+        android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/bottom_type_send_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/text_editext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/text_send_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@color/black_1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

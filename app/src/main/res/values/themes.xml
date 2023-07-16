@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.GameBuddy" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/blue</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/black_1</item>
+        <item name="colorSecondaryVariant">@color/yellow</item>
+
+        <item name="colorPrimaryDark">@color/black_1</item>
+
+    </style>
+
+    <style name="Theme.GameBuddy" parent="Base.Theme.GameBuddy"/>
+
+    <style name="SplashTheme" parent="Theme.GameBuddy">
+        <item name="android:windowBackground">@drawable/background_image_with_logo</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+</resources>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    tools:context=".home.SuggestionFragment">
+
+    <TextView
+        android:id="@+id/suggestion_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/suggestion"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:elevation="4dp"
+        android:id="@+id/suggestion_message_card"
+        android:layout_below="@id/suggestion_title"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="4dp"
+        android:backgroundTint="@color/black_3"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="12dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/anouncement_title"
+                android:layout_width="wrap_content"
+                android:text="Poem for you"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_below="@+id/anouncement_title"
+                android:id="@+id/anouncement_desc"
+                android:layout_width="wrap_content"
+                android:text="You are the heroes of our app\nYou test it day and night\nYou find the errors and the gaps\nYou make it work just right\nYou are the ones who give us tips\nYou share your thoughts and views\nYou help us make our app a hit\nYou give us great reviews\nYou are the ones who care so much\nYou want our app to shine\nYou are the ones who keep in touch\nYou are our lifeline\nThank you for being our beta testers\nThank you for all you do\nYou are our app’s best investors\nWe are so grateful to you 😊"
+                android:textSize="14sp"
+                android:textColor="@color/black_5"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/blue"
+        app:hintTextColor="@color/blue"
+        android:layout_below="@id/suggestion_message_card"
+        app:counterEnabled="true"
+        app:boxStrokeErrorColor="@color/red"
+        app:endIconMode="clear_text"
+        app:endIconDrawable="@drawable/cancel_ic_padding"
+        app:errorEnabled="true"
+        app:errorIconTint="@color/red"
+        android:layout_marginTop="8dp"
+        app:counterMaxLength="200"
+        app:boxBackgroundColor="@color/mtrl_filled_background_color"
+        app:startIconDrawable="@drawable/suggestion_ic_padding"
+        android:hint="Suggestion/Bug report">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/suggestion_text_edit"
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        app:layout_anchorGravity="bottom|right|end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/suggestion_btn"
+            app:backgroundTint="@color/blue"
+            app:fabSize="normal"
+            app:tint="@color/black_1"
+            app:shapeAppearanceOverlay="@style/fab_style"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_ic"/>
+
+        <ProgressBar
+            android:id="@+id/fabProgress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/yellow" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
