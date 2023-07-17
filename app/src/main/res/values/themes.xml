@@ -15,11 +15,7 @@
 
     <style name="SplashTheme" parent="Theme.GameBuddy">
         <item name="android:windowBackground">@drawable/background_image_with_logo</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">centerInside</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

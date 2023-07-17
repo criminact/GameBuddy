@@ -35,7 +35,7 @@ class UserFragment : Fragment() {
 
         binding.inviteCodeBtn.setOnClickListener {
             val clipboardManager = CustomApplication.ApplicationContext.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            clipboardManager.setPrimaryClip(ClipData.newPlainText   ("", "You have been invited to beta test an app that is unlike any other. To join the program, enter this invitation code:$binding.inviteDesc.text.toString()"))
+            clipboardManager.setPrimaryClip(ClipData.newPlainText   ("", "You have been invited to test GameBuddy, an app that is unlike any other. To join the program, enter this invitation code: ${binding.inviteDesc.text}"))
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
                 Toast.makeText(CustomApplication.ApplicationContext, "Copied", Toast.LENGTH_SHORT).show()
         }

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".CustomApplication"
@@ -16,6 +16,17 @@
         android:theme="@style/Theme.GameBuddy"
         tools:targetApi="31">
         <activity
+            android:name=".invite.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:noHistory="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".invite.FeatureActivity"
             android:exported="false" />
         <activity
@@ -28,17 +39,9 @@
             android:name=".home.LookActivity"
             android:exported="false" />
         <activity
-            android:noHistory="true"
-            android:theme="@style/SplashTheme"
             android:name=".invite.InviteActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:exported="true"
+            android:noHistory="true"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

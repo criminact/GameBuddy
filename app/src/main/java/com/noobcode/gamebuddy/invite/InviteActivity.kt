@@ -50,13 +50,20 @@ class InviteActivity : AppCompatActivity() {
     }
 
     private fun validateInviteCode() {
-        if(!binding.inviteCodeEditext.text.isNullOrEmpty()){
+        if(binding.inviteCodeEditext.text.isNullOrEmpty()){
+            binding.filledTextField.error = "Invite code empty, please try again."
+            hideLoadingUI()
+        }else if(binding.inviteCodeEditext.text.toString().length > 5){
+            binding.filledTextField.error = "Invite code seems wrong, please try again."
+            hideLoadingUI()
+        }
+        else{
             viewmodel.checkForInviteCode(binding.inviteCodeEditext.text.toString(), FirebaseObject.currentUser.uid).observe(this, Observer {
                 if(it != -99){
                     //writing now
                     if(it == 0){
                         //writing failed
-                        binding.filledTextField.error = "invite code invalid, please try again."
+                        binding.filledTextField.error = "Invite code invalid, please try again."
                         hideLoadingUI()
                     }else{
                         //writing success
@@ -65,81 +72,11 @@ class InviteActivity : AppCompatActivity() {
                     }
                 }
             })
-        }else{
-            binding.filledTextField.error = "invite code empty, please try again."
-            hideLoadingUI()
         }
     }
 
     private fun openHome() {
         startActivity(Intent(this, HomeActivity::class.java))
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val currUser = FirebaseObject.auth.currentUser
-
-        if(currUser == null){
-            FirebaseObject.auth.signInAnonymously()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        val user = FirebaseObject.auth.currentUser
-                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(
-                            baseContext,
-                            "Authentication failed.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        updateUI(null)
-                    }
-                }
-        }else{
-            FirebaseObject.currentUser = currUser
-            updateUI(currUser)
-        }
-    }
-
-    private fun updateUI(firebaseUser: FirebaseUser?) {
-        if(firebaseUser == null){
-            Toast.makeText(
-                baseContext,
-                "Authentication failed.",
-                Toast.LENGTH_SHORT,
-            ).show()
-        }else{
-            FirebaseObject.currentUser = firebaseUser
-            Toast.makeText(
-                baseContext,
-                "Authentication success.",
-                Toast.LENGTH_SHORT,
-            ).show()
-
-            //check sp if user verified?
-            //if yes then go to home
-            var isVerified: Boolean = prefs.pull(key = "isVerified", fallback = false)
-            //if not then check from db
-            if(isVerified){
-                openHome()
-            }else{
-                viewmodel.checkIfUserVerified(firebaseUser.uid).observe(this, Observer {
-                    if(it != -99){
-                        //writing now
-                        if(it == 0){
-                            //writing failed
-                            hideLoadingUI()
-                        }else{
-                            //writing success
-                            prefs.push("isVerified", true)
-                            openHome()
-                        }
-                    }
-                })
-            }
-        }
     }
 }
 
